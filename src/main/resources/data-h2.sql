@@ -1,0 +1,1 @@
+INSERT INTO WEBSITE(NAME, URL, TIME_MARGIN, LAST_SEEN) VALUES('weibo', 'http://weibo.cn/beta', 3600, '2018-06-06 12:01:30');

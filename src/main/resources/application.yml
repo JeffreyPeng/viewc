@@ -1,0 +1,16 @@
+
+spring:
+    main: 
+        banner-mode: "off"       
+    datasource: 
+        platform: h2
+        url: "jdbc:h2:~/viewcDb;DB_CLOSE_ON_EXIT=FALSE"
+
+    freemarker: 
+        template-loader-path: classpath:/templates
+        suffix: .ftl
+
+logging: 
+    level: 
+        org: 
+            springframework: INFO
