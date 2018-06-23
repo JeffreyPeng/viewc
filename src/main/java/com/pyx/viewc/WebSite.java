@@ -49,4 +49,15 @@ public class WebSite {
     public void setLastSeen(Date lastSeen) {
         this.lastSeen = lastSeen;
     }
+
+    @Override
+    public String toString() {
+        return "WebSite{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", timeMargin=" + timeMargin +
+                ", lastSeen=" + lastSeen +
+                '}';
+    }
 }

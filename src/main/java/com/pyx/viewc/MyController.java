@@ -27,32 +27,50 @@ public class MyController {
         return "index";
     }
 
-    @RequestMapping("/showList")
-    public ModelAndView showList() {
-
-        List<WebSite> websites = webSiteService.findAll();
-
+    @RequestMapping("/home")
+    public ModelAndView home() throws Exception {
+        List<WebSiteForm> websites = webSiteService.findAll();
         Map<String, Object> params = new HashMap<>();
         params.put("websites", websites);
-
-        log.info("hhahah ,log good");
-        return new ModelAndView("showList", params);
+        return new ModelAndView("home", params);
     }
 
-    @ResponseBody
+    @RequestMapping("/manage")
+    public ModelAndView manage() throws Exception {
+        List<WebSiteForm> websites = webSiteService.findAll();
+        Map<String, Object> params = new HashMap<>();
+        params.put("websites", websites);
+        return new ModelAndView("manage", params);
+    }
+
+    @RequestMapping("/toAdd")
+    public String toAdd() {
+        return "toAdd";
+    }
+
     @RequestMapping("/add")
     public String add(WebSite webSite) {
+        log.info("add param :" + webSite.toString());
         boolean addCount = webSiteService.add(webSite);
-        log.info("result:" + addCount);
-        return "true";
+        log.info("add result:" + addCount);
+        return "redirect:/manage";
+    }
+
+    @RequestMapping("/del")
+    public String del(int id) {
+        log.info("del param :" + id);
+        boolean delCount = webSiteService.del(id);
+        log.info("del result:" + delCount);
+        return "redirect:/manage";
     }
 
     @ResponseBody
-    @RequestMapping("/del")
-    public String del(int id) {
-        boolean delCount = webSiteService.del(id);
-        log.info("result:" + delCount);
-        return "true";
+    @RequestMapping("/addView")
+    public String addView(int id) {
+        log.info("addView param :" + id);
+        boolean updateCount = webSiteService.addView(id);
+        log.info("addView result:" + updateCount);
+        return updateCount + "";
     }
 
 }

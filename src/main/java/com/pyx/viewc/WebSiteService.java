@@ -1,10 +1,13 @@
 package com.pyx.viewc;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,9 +34,24 @@ public class WebSiteService {
         return false;
     }
 
-    public List<WebSite> findAll() {
+    public List<WebSiteForm> findAll() throws InvocationTargetException, IllegalAccessException {
         String sql = "SELECT * FROM WEBSITE";
-        List<WebSite> cities = jtm.query(sql, new BeanPropertyRowMapper(WebSite.class));
-        return cities;
+        List<WebSite> list = jtm.query(sql, new BeanPropertyRowMapper(WebSite.class));
+        List<WebSiteForm> newList = new ArrayList<>();
+        for (WebSite webSite : list) {
+            WebSiteForm form = new WebSiteForm();
+            BeanUtils.copyProperties(form, webSite);
+            newList.add(form);
+        }
+        return newList;
+    }
+
+    public boolean addView(int id) {
+        String sql = "UPDATE WEBSITE SET LAST_SEEN = NOW() WHERE ID = ?";
+        int updateCount = jtm.update(sql, id);
+        if (updateCount == 1) {
+            return true;
+        }
+        return false;
     }
 }
