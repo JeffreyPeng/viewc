@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="bookmark" href="/favicon.png" type="image/x-icon"　/>
         <title>${title}</title>
     </head>
     <body>
@@ -25,6 +27,7 @@
                 <ul class="nav navbar-nav">
                     <li class="${isHome!}"><a href="home">主页</a></li>
                     <li class="${isManage!}"><a href="manage">管理</a></li>
+                    <li class="${isHeartBeat!}"><a href="heartBeat">心跳</a></li>
                     <li class="${isIndex!}"><a href="index">关于</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
